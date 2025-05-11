@@ -11,12 +11,42 @@ app.use(morgan('dev'));
 app.post('/send-message/:selected', (req, res) => {
   const { selected } = req.params;
   // console.log(req.params.selected);
+
+  const flexMessage = {
+    "type": "bubble",
+    "size": "micro",
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "image",
+          "url": `https://d2cva83hdk3bwc.cloudfront.net/${selected}`
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": `"${selected}"`,
+              "size": "10px",
+              "wrap": true,
+              "align": "center"
+            }
+          ]
+        }
+      ]
+    }
+  }
+
   const payload = {
     to: 'U2e9f8492969cc79fc1fc6a834d0048a3',
     messages: [
       {
-        type: 'text',
-        text: `'${selected}'`,
+        type: 'flex',
+        altText: 'selected rally movement bag',
+        contents: flexMessage,
       },
     ],
   };
