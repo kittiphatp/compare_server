@@ -8,13 +8,15 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(morgan('dev'));
 
-app.post('/send-message', (req, res) => {
+app.post('/send-message/:selected', (req, res) => {
+  const { selected } = req.params;
+  // console.log(req.params.selected);
   const payload = {
     to: 'U2e9f8492969cc79fc1fc6a834d0048a3',
     messages: [
       {
         type: 'text',
-        text: 'Hello, this is a test message from my React app!',
+        text: `'${selected}'`,
       },
     ],
   };
