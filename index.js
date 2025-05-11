@@ -5,12 +5,13 @@ import cors from 'cors';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan('dev'));
 
-app.post('/send-message/:selected', (req, res) => {
-  const { selected } = req.params;
-  // console.log(req.params.selected);
+app.post('/send-message', (req, res) => {
+  const { selected } = req.body;
 
   const flexMessage = {
     "type": "bubble",
@@ -69,9 +70,6 @@ app.post('/send-message/:selected', (req, res) => {
     .catch((error) => {
       res.status(500).send('Error sending message');
     });
-});
+})
 
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
