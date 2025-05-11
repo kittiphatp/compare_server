@@ -12,6 +12,8 @@ app.use(morgan('dev'));
 
 app.post('/send-message', (req, res) => {
   const { selected } = req.body;
+  // console.log('Selected item:', selected);
+  // console.log(req.body)
 
   const flexMessage = {
     "type": "bubble",
@@ -68,7 +70,7 @@ app.post('/send-message', (req, res) => {
       }
     })
     .catch((error) => {
-      res.status(500).send('Error sending message');
+      res.status(500).send('Error sending message', error);
     });
 })
 
